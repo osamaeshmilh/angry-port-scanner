@@ -6,13 +6,13 @@ import android.net.wifi.WifiInfo
 import android.net.wifi.WifiManager
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.*
 import osama.com.angryportscanner.dao.DeviceDao
 import osama.com.angryportscanner.dao.NetworkDao
 import osama.com.angryportscanner.dao.ScanDao
 import osama.com.angryportscanner.model.Network
 import osama.com.angryportscanner.model.Scan
 import osama.com.angryportscanner.scanner.*
-import kotlinx.coroutines.*
 import java.net.Inet4Address
 
 

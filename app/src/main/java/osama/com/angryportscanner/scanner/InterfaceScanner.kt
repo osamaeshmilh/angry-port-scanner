@@ -11,7 +11,12 @@ object InterfaceScanner {
                 networkInterface.interfaceAddresses.asSequence().map {
                     val addr = it.address
                     if (!addr.isLoopbackAddress && addr is Inet4Address) {
-                        NetworkResult(addr, it.networkPrefixLength, networkInterface.displayName, networkInterface.displayName)
+                        NetworkResult(
+                            addr,
+                            it.networkPrefixLength,
+                            networkInterface.displayName,
+                            networkInterface.displayName
+                        )
                     } else {
                         null
                     }

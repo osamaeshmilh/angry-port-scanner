@@ -144,9 +144,9 @@
             android:text="@string/title_open_ports"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-        <de.csicar.ning.ui.RecyclerViewCommon
+        <osama.com.angryportscanner.ui.RecyclerViewCommon
             android:id="@+id/list"
-            android:name="de.csicar.ning.DeviceInfoFragment"
+            android:name="osama.com.angryportscanner.DeviceInfoFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -154,6 +154,6 @@
             android:nestedScrollingEnabled="false"
             app:layoutManager="LinearLayoutManager"
             tools:context=".ui.DeviceInfoFragment"
-            tools:listitem="@layout/fragment_port_item"/>
+            tools:listitem="@layout/fragment_port_item" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

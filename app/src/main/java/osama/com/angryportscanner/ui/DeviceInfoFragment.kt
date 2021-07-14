@@ -11,6 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.android.synthetic.main.fragment_port_item.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import osama.com.angryportscanner.R
 import osama.com.angryportscanner.ScanViewModel
 import osama.com.angryportscanner.model.Device
@@ -18,10 +22,6 @@ import osama.com.angryportscanner.model.Port
 import osama.com.angryportscanner.scanner.PortScanner
 import osama.com.angryportscanner.util.AppPreferences
 import osama.com.angryportscanner.util.CopyUtil
-import kotlinx.android.synthetic.main.fragment_port_item.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 /**

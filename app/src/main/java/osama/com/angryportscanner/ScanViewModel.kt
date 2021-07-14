@@ -8,7 +8,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import osama.com.angryportscanner.model.Network
 import osama.com.angryportscanner.repositories.ScanRepository
-import osama.com.angryportscanner.scanner.*
+import osama.com.angryportscanner.scanner.InterfaceScanner
 
 class ScanViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -39,14 +39,15 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     class NetworksLiveData(context: Context, private val networkScanRepository: ScanRepository) :
-        LiveData<List<InterfaceScanner.NetworkResult>>()
-         {
-        private val connectivityManager: ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        private val callback = object: ConnectivityManager.NetworkCallback() {
+        LiveData<List<InterfaceScanner.NetworkResult>>() {
+        private val connectivityManager: ConnectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        private val callback = object : ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: android.net.Network) {
                 refresh()
             }
         }
+
         override fun onActive() {
             super.onActive()
             connectivityManager.registerNetworkCallback(NetworkRequest.Builder().build(), callback)
@@ -63,7 +64,8 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     suspend fun startScan(interfaceName: String): Network? {
-        val network = networkScanRepository.startScan(interfaceName, scanProgress, currentNetworkId) ?: return null
+        val network = networkScanRepository.startScan(interfaceName, scanProgress, currentNetworkId)
+            ?: return null
         currentScanId.value = network.scanId
         return network
     }

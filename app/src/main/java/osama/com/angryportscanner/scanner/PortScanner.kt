@@ -1,11 +1,11 @@
 package osama.com.angryportscanner.scanner
 
 import android.util.Log
-import osama.com.angryportscanner.model.PortDescription
-import osama.com.angryportscanner.model.enums.Protocol
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
+import osama.com.angryportscanner.model.PortDescription
+import osama.com.angryportscanner.model.enums.Protocol
 import java.io.IOException
 import java.io.InterruptedIOException
 import java.net.*
@@ -45,7 +45,7 @@ class PortScanner(val ip: InetAddress) {
             return@withContext false
         } catch (ex: NoRouteToHostException) {
             Log.d(TAG, "No Route to Host: $ex")
-            return@withContext  false
+            return@withContext false
         } finally {
             socket?.close()
         }

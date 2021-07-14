@@ -10,12 +10,14 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext
 import java.net.Inet4Address
 
-class NsdScanner(application: Application, private val onUpdate : (ScanResult) -> Unit) {
+class NsdScanner(application: Application, private val onUpdate: (ScanResult) -> Unit) {
     companion object {
         val TAG = NsdScanner::class.java.name
     }
+
     val nsdManager =
         application.applicationContext.getSystemService(Context.NSD_SERVICE) as NsdManager
+
     /** mDNS Service Types, that the application checks for.
      * Unfortunately, android does not offer an API for discovering all services
      * See: http://www.dns-sd.org/servicetypes.html

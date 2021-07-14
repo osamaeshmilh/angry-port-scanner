@@ -14,14 +14,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_device.view.*
+import kotlinx.coroutines.launch
 import osama.com.angryportscanner.R
 import osama.com.angryportscanner.ScanViewModel
 import osama.com.angryportscanner.model.DeviceWithName
 import osama.com.angryportscanner.repositories.ScanRepository
 import osama.com.angryportscanner.util.AppPreferences
 import osama.com.angryportscanner.util.CopyUtil
-import kotlinx.android.synthetic.main.fragment_device.view.*
-import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 
 /**
@@ -47,7 +47,7 @@ class NetworkFragment : Fragment() {
         emptyListInfo = view.findViewById<View>(R.id.swipeDownViewImage)
         swipeRefreshLayout = view.findViewById(R.id.swipeDownView)
         argumentInterfaceName = arguments?.getString("interface_name")!!
-        
+
         val copyUtil = CopyUtil(view)
 
 
@@ -93,7 +93,8 @@ class NetworkFragment : Fragment() {
                         macTextView.text = item.hwAddress?.getAddress(
                             AppPreferences(
                                 this@NetworkFragment
-                            ).hideMacDetails)
+                            ).hideMacDetails
+                        )
                         vendorTextView.text = item.vendorName
                         deviceNameTextView.text = if (item.isScanningDevice) {
                             getString(R.string.this_device)
@@ -127,13 +128,16 @@ class NetworkFragment : Fragment() {
     }
 
 
-
     private fun runScan() {
         viewModel.viewModelScope.launch {
             val network = viewModel.startScan(argumentInterfaceName)
             val view = this@NetworkFragment.view
             if (network == null && view != null) {
-                Snackbar.make(view, getString(R.string.error_network_not_found), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    view,
+                    getString(R.string.error_network_not_found),
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
     }

@@ -1,7 +1,10 @@
 package osama.com.angryportscanner.scanner
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.withContext
 import osama.com.angryportscanner.model.Network
-import kotlinx.coroutines.*
 import java.net.Inet4Address
 
 class PingScanner(

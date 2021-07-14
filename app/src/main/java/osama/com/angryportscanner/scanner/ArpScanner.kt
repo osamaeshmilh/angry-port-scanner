@@ -38,7 +38,7 @@ private fun InputStream.readStreamAsTable(): Sequence<List<String>> {
 
 
 object ArpScanner {
-    
+
     private val TAG = ArpScanner.javaClass.name
 
     suspend fun getFromAllSources() = withContext(Dispatchers.Default) {

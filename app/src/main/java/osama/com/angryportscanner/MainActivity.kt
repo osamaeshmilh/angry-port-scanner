@@ -11,9 +11,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import kotlinx.android.synthetic.main.activity_main.*
 import osama.com.angryportscanner.model.DeviceWithName
 import osama.com.angryportscanner.ui.NetworkFragment
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.forEach as forEach1
 
 
@@ -30,27 +30,30 @@ class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteract
         val navController = findNavController(R.id.nav_host_fragment)
         drawer_navigation.setupWithNavController(navController)
         setSupportActionBar(toolbar)
-        appBarConfiguration = AppBarConfiguration.Builder(setOf(R.id.deviceFragment, R.id.appPreferenceFragment))
-            .setOpenableLayout(main_drawer_layout)
-            .build()
+        appBarConfiguration =
+            AppBarConfiguration.Builder(setOf(R.id.deviceFragment, R.id.appPreferenceFragment))
+                .setOpenableLayout(main_drawer_layout)
+                .build()
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         viewModel = ViewModelProvider(this).get(ScanViewModel::class.java)
 
-        val interfaceMenu = drawer_navigation.menu.addSubMenu(getString(R.string.interfaces_submenu))
+        val interfaceMenu =
+            drawer_navigation.menu.addSubMenu(getString(R.string.interfaces_submenu))
 
         viewModel.fetchAvailableInterfaces().forEach1 { nic ->
-            interfaceMenu.add("${nic.interfaceName} - ${nic.address.hostAddress}/${nic.prefix}").also {
-                it.setOnMenuItemClickListener {
-                    val bundle = bundleOf("interface_name" to nic.interfaceName)
-                    nav_host_fragment.findNavController().navigate(R.id.deviceFragment, bundle)
-                    main_drawer_layout.closeDrawers()
-                    true
+            interfaceMenu.add("${nic.interfaceName} - ${nic.address.hostAddress}/${nic.prefix}")
+                .also {
+                    it.setOnMenuItemClickListener {
+                        val bundle = bundleOf("interface_name" to nic.interfaceName)
+                        nav_host_fragment.findNavController().navigate(R.id.deviceFragment, bundle)
+                        main_drawer_layout.closeDrawers()
+                        true
+                    }
+                    it.setIcon(R.drawable.ic_settings_ethernet_white_24dp)
+                    it.isCheckable = true
+                    it.isEnabled = true
                 }
-                it.setIcon(R.drawable.ic_settings_ethernet_white_24dp)
-                it.isCheckable = true
-                it.isEnabled = true
-            }
         }
         val preferences = drawer_navigation.menu.add(getString(R.string.preferences_submenu))
         preferences.setIcon(R.drawable.ic_settings_white_24dp)

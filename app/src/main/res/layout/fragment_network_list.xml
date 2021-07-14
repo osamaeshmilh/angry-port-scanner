@@ -47,8 +47,8 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeDownView"
         android:layout_width="match_parent"
-        android:layout_margin="0dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_margin="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,9 +66,9 @@
                 android:max="1000"
                 tools:progress="300" />
 
-            <de.csicar.ning.ui.RecyclerViewCommon
+            <osama.com.angryportscanner.ui.RecyclerViewCommon
                 android:id="@+id/devicesList"
-                android:name="de.csicar.ning.deviceFragment"
+                android:name="osama.com.angryportscanner.deviceFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="LinearLayoutManager"

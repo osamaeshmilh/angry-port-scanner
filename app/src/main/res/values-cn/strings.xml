@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ning</string>
+    <string name="app_name">Angry Port Scanner</string>
 
     <string name="swipe_down_to_scan_the_network">向下滑动扫描本地网络</string>
     <string name="device_icon">设备图标</string>

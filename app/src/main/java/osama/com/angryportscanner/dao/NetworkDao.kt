@@ -8,13 +8,6 @@ import osama.com.angryportscanner.model.Network
 
 @Dao
 interface NetworkDao {
-    @Query("Select * FROM network WHERE scanId = :scanId")
-    fun getAll(scanId: Long): LiveData<List<Network>>
-
-
-    @Query("Select * FROM network WHERE scanId = :scanId")
-    fun getAllNow(scanId: Long): List<Network>
-
     @Insert
     fun insert(network: Network): Long
 

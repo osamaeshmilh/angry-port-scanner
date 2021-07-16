@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkRequest
-import android.util.Log
 import androidx.lifecycle.*
 import osama.com.angryportscanner.model.Network
 import osama.com.angryportscanner.repositories.ScanRepository
@@ -25,11 +24,6 @@ class ScanViewModel(application: Application) : AndroidViewModel(application) {
 
     val devices = Transformations.switchMap(currentNetworkId) {
         deviceDao.getAll(it)
-    }
-
-    val currentNetworks = Transformations.switchMap(currentScanId) {
-        Log.d("asd", "netowkrsadss $it")
-        networkDao.getAll(it)
     }
 
     fun fetchAvailableInterfaces() = networkScanRepository.fetchAvailableInterfaces()

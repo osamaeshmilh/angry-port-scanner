@@ -54,7 +54,8 @@ class ScanRepository(
                     newScanId,
                     networkData.interfaceName,
                     bssid,
-                    connectionInfo?.ssid
+                    connectionInfo?.ssid,
+                    System.currentTimeMillis() / 1000L
                 )
             )
             withContext(Dispatchers.Main) {

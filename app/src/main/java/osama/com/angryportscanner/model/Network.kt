@@ -15,7 +15,8 @@ data class Network(
     val scanId: Long,
     val interfaceName: String,
     val bssid: MacAddress?,
-    val ssid: String?
+    val ssid: String?,
+    val startedAt: Long
 ) {
 
     companion object {
@@ -25,9 +26,19 @@ data class Network(
             scanId: Long,
             interfaceName: String,
             bssid: MacAddress?,
-            ssid: String?
+            ssid: String?,
+            startedAt: Long
         ): Network {
-            return Network(0, ip.maskWith(mask), mask, scanId, interfaceName, bssid, ssid)
+            return Network(
+                0,
+                ip.maskWith(mask),
+                mask,
+                scanId,
+                interfaceName,
+                bssid,
+                ssid,
+                startedAt
+            )
         }
     }
 

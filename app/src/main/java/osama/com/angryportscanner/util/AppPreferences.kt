@@ -26,4 +26,9 @@ class AppPreferences {
         get(): Boolean {
             return preferences.getBoolean("hideMacDetails", false)
         }
+
+    val scanAll
+        get(): Boolean {
+            return preferences.getBoolean("scan_all", false)
+        }
 }

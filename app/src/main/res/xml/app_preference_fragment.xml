@@ -5,4 +5,79 @@
         android:defaultValue="false"
         android:key="hideMacDetails"
         android:title="@string/hideMacAddressDetails" />
+
+    <PreferenceCategory android:title="@string/scanning">
+
+        <ListPreference
+            android:key="discovery_method"
+            android:title="@string/preferences_discover_method_title"
+            android:summary="@string/preferences_discover_method_summary"
+            android:entries="@array/method_discover_name"
+            android:entryValues="@array/method_discover_value"
+            android:dialogTitle="@string/preferences_discover_method_title_dialog"
+            android:defaultValue="1" />
+
+        <CheckBoxPreference
+            android:key="scan_all"
+            android:title="@string/preferences_scan_all_title"
+            android:summary="@string/preferences_scan_all_summry"
+            android:defaultValue="false" />
+
+        <CheckBoxPreference
+            android:key="ip_custom"
+            android:title="@string/preferences_ip_custom_title"
+            android:summary="@string/preferences_ip_custom_summary"
+            android:defaultValue="false" />
+        <EditTextPreference
+            android:key="ip_start"
+            android:title="@string/preferences_ip_start_title"
+            android:summary="@string/preferences_ip_start_summary"
+            android:inputType="number"
+            android:digits="1234567890."
+            android:defaultValue="0.0.0.0"
+            android:dependency="ip_custom" />
+
+        <EditTextPreference
+            android:key="threads"
+            android:title="Threads"
+            android:summary="Number of threads"
+            android:defaultValue="30"
+            android:digits="1234567890"
+            android:inputType="number" />
+        <EditTextPreference
+            android:key="timeout"
+            android:title="@string/preferences_timeout_title"
+            android:summary="@string/preferences_timeout_summary"
+            android:defaultValue="200"
+            android:digits="1234567890"
+            android:inputType="number" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="@string/display">
+
+
+        <ListPreference
+            android:key="results"
+            android:title="Results"
+            android:summary="Type of results to show"
+            android:entries="@array/result_names"
+            android:entryValues="@array/result_values"
+            android:dialogTitle="Choose type of results to show"
+            android:defaultValue="1" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory android:title="@string/ports">
+
+
+        <EditTextPreference
+            android:key="ports"
+            android:title="Default Ports"
+            android:summary="Default ports eg:21,5900 or 20-80"
+            android:inputType="number"
+            android:digits="-,1234567890" />
+    </PreferenceCategory>
 </PreferenceScreen>

@@ -2,8 +2,8 @@ package osama.com.angryportscanner.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import osama.com.angryportscanner.model.DBViews.DeviceWithName
 import osama.com.angryportscanner.model.Device
-import osama.com.angryportscanner.model.DeviceWithName
 import osama.com.angryportscanner.scanner.MacAddress
 import java.net.Inet4Address
 

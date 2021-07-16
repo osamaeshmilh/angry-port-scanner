@@ -12,7 +12,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
-import osama.com.angryportscanner.model.DeviceWithName
+import osama.com.angryportscanner.model.DBViews.DeviceWithName
 import osama.com.angryportscanner.ui.NetworkFragment
 import kotlin.collections.forEach as forEach1
 

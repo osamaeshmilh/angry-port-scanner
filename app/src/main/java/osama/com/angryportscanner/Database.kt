@@ -7,6 +7,7 @@ import osama.com.angryportscanner.dao.NetworkDao
 import osama.com.angryportscanner.dao.PortDao
 import osama.com.angryportscanner.dao.ScanDao
 import osama.com.angryportscanner.model.*
+import osama.com.angryportscanner.model.DBViews.DeviceWithName
 import osama.com.angryportscanner.model.enums.Protocol
 import osama.com.angryportscanner.scanner.MacAddress
 import osama.com.angryportscanner.util.inet4AddressFromInt
@@ -16,7 +17,7 @@ import java.util.*
 @Database(
     entities = [Network::class, Device::class, Port::class, MacVendor::class, Scan::class],
     views = [DeviceWithName::class],
-    version = 21
+    version = 2
 )
 @TypeConverters(Converter::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -30,9 +31,9 @@ abstract class AppDatabase : RoomDatabase() {
             return Room
                 .databaseBuilder(
                     application.applicationContext,
-                    AppDatabase::class.java, "ning-db"
+                    AppDatabase::class.java, "angry-port-db"
                 )
-                .createFromAsset("mac_devices.db")
+                .createFromAsset("mac_and_ports.db")
                 .fallbackToDestructiveMigration()
                 .build()
         }

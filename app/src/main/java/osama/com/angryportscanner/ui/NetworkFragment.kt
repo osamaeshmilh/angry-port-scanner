@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_device.view.*
 import kotlinx.coroutines.launch
 import osama.com.angryportscanner.R
 import osama.com.angryportscanner.ScanViewModel
-import osama.com.angryportscanner.model.DeviceWithName
+import osama.com.angryportscanner.model.DBViews.DeviceWithName
 import osama.com.angryportscanner.repositories.ScanRepository
 import osama.com.angryportscanner.util.AppPreferences
 import osama.com.angryportscanner.util.CopyUtil

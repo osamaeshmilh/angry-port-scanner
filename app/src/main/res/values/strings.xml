@@ -29,4 +29,43 @@
     <string name="device_type_cast">Cast</string>
     <string name="device_type_unknown">Unknown</string>
     <string name="device_type_home_appliance">Home Appliance</string>
+
+
+    <string name="action_settings">Settings</string>
+
+    <string name="preferences_timeout_title">Connect timeout</string>
+    <string name="preferences_timeout_summary">Timeout of a port connection in millisecondes</string>
+    <string name="preferences_discover_method_title">Discover Method</string>
+    <string name="preferences_discover_method_summary">Change to different method of host discovery</string>
+    <string name="preferences_discover_method_title_dialog">Choose a method</string>
+    <string name="preferences_ip_start_title">IP start</string>
+    <string name="preferences_ip_start_summary">First IP address to scan</string>
+    <string name="preferences_ip_custom_title">Custom IP range</string>
+    <string name="preferences_ip_custom_summary">Manually set start IP</string>
+
+    <string name="preferences_error4">Error: Value is not a valid IP address !</string>
+    <string name="copy">Copy</string>
+    <string name="preferences_scan_all_title">Scan all hosts</string>
+    <string name="preferences_scan_all_summry">Scan dead hosts which don\'t replay to pings.</string>
+    <string name="no_ports">No open ports</string>
+    <string name="scanning">Scanning</string>
+    <string name="display">Display</string>
+    <string name="ports">Ports</string>
+    <string name="preferences_error5">Error: enter threads number</string>
+    <string name="preferences_error6">Error: enter timeout in ms</string>
+    <string name="key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmCG8X807kHMOK4FR10Su900hudZvyNOYoqFjtrv2aoXofNDm7G/N8lqhz59nxIlFv+zT1aNodiOpqAN8U+BkkcCS82Jr8QmzeDIaJCZMhLwJZaZwkQfNhn5gzXVH3o/l25U4xNAhT1/8qvS5OulwEMjQjTnNs22hw+BFCXovkO/5Xin/P8L0J0xWoV+oPmj0xonzSZrqxwgisiCWlBbPS2GF+xc18QadU05X1p3c2HIMQ86hndHlVtjDtGUwHTV/XhZzr2JYrWLI+H4LvyYIcWt2r05eGb7JX/0JQX4DeLoqBcKJHEA2Z0VL70aQqTPdDaVkNlhM4zRKAieYV6ajxQIDAQAB</string>
+    <string name="remove_ads">Remove Ads</string>
+    <string name="export_csv_report">Export CSV Report</string>
+
+    <string-array name="method_discover_name">
+        <item>INet only (Fastest , Less accurate)</item>
+        <item>INet with ports (Recommended)</item>
+        <item>ICMP Ping (Slow)</item>
+    </string-array>
+
+    <string-array name="result_names">
+        <item>With open ports only</item>
+        <item>Open ports or alive</item>
+        <item>All hosts</item>
+    </string-array>
 </resources>

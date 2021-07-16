@@ -1,7 +1,8 @@
-package osama.com.angryportscanner.model
+package osama.com.angryportscanner.model.DBViews
 
 import androidx.room.DatabaseView
 import androidx.room.Ignore
+import osama.com.angryportscanner.model.Device
 import osama.com.angryportscanner.model.enums.DeviceType
 import osama.com.angryportscanner.scanner.MacAddress
 import java.net.Inet4Address

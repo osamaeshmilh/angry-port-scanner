@@ -107,10 +107,10 @@ class DeviceInfoFragment : Fragment() {
                 copyUtil.makeTextViewCopyable(protocolTextView)
                 copyUtil.makeTextViewCopyable(serviceTextView)
 
-                return { item ->
-                    portNumberTextView.text = item.port.toString()
-                    protocolTextView.text = item.protocol.toString()
-                    serviceTextView.text = item.description?.serviceName
+                return { port ->
+                    portNumberTextView.text = port.port.toString()
+                    protocolTextView.text = port.protocol.toString()
+                    serviceTextView.text = port.description?.serviceName
                 }
             }
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "523144548133",
+    "project_id": "angry-port-scanner",
+    "storage_bucket": "angry-port-scanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523144548133:android:20349a9ca232f092e0d4cc",
+        "android_client_info": {
+          "package_name": "osama.com.angryportscanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523144548133-dld5dev7k0mt6ju8v0i6qjhet7sm1j87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5_ebEfNRn291G8eTTgokfjQpphsOxXvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523144548133-dld5dev7k0mt6ju8v0i6qjhet7sm1j87.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

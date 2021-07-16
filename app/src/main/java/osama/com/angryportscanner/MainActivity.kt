@@ -1,7 +1,12 @@
 package osama.com.angryportscanner
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +16,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import kotlinx.android.synthetic.main.activity_main.*
 import osama.com.angryportscanner.model.DBViews.DeviceWithName
 import osama.com.angryportscanner.ui.NetworkFragment
@@ -27,6 +34,27 @@ class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteract
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Create channel to show notifications.
+            val channelId = getString(R.string.default_notification_channel_id)
+            val channelName = getString(R.string.default_notification_channel_name)
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager?.createNotificationChannel(
+                NotificationChannel(
+                    channelId,
+                    channelName, NotificationManager.IMPORTANCE_LOW
+                )
+            )
+        }
+
+        Firebase.messaging.subscribeToTopic("default")
+            .addOnCompleteListener { task ->
+                Log.d("f", "sub")
+                Toast.makeText(baseContext, "default", Toast.LENGTH_SHORT).show()
+            }
+
+
         val navController = findNavController(R.id.nav_host_fragment)
         drawer_navigation.setupWithNavController(navController)
         setSupportActionBar(toolbar)

@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -44,19 +43,19 @@ class NetworkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_network_list, container, false)
-        emptyListInfo = view.findViewById<View>(R.id.swipeDownViewImage)
+        emptyListInfo = view.findViewById(R.id.swipeDownViewImage)
         swipeRefreshLayout = view.findViewById(R.id.swipeDownView)
         argumentInterfaceName = arguments?.getString("interface_name")!!
 
         val copyUtil = CopyUtil(view)
 
 
-        viewModel.devices.observe(viewLifecycleOwner, Observer {
+        viewModel.devices.observe(viewLifecycleOwner, {
             emptyListInfo.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
         })
 
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
-        viewModel.scanProgress.observe(viewLifecycleOwner, Observer {
+        viewModel.scanProgress.observe(viewLifecycleOwner, {
             when (it) {
                 is ScanRepository.ScanProgress.ScanFinished -> {
                     progressBar.visibility = View.INVISIBLE

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#087b43</color>
-    <color name="colorPrimaryDark">#085E34</color>
+    <color name="colorPrimary">#26A69A</color>
+    <color name="colorPrimaryDark">#129387</color>
     <color name="colorAccent">#FFAE22</color>
     <color name="white">#FFFF</color>
     <color name="blue_material">#1565c0</color>
@@ -10,4 +10,12 @@
     <color name="red_material">#d32f2f</color>
     <color name="trans">#00000000</color>
     <color name="whiteLight">#fafafa</color>
+    <color name="background">#F6F6F6</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
+    <color name="has_open_ports_color">#66BB6A</color>
+    <color name="live_port_color">#1976D2</color>
+    <color name="dead_port_color">#D32F2F</color>
 </resources>

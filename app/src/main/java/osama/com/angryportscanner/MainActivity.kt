@@ -6,12 +6,14 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -24,7 +26,6 @@ import com.google.firebase.messaging.ktx.messaging
 import kotlinx.android.synthetic.main.activity_main.*
 import osama.com.angryportscanner.model.DBViews.DeviceWithName
 import osama.com.angryportscanner.ui.NetworkFragment
-import kotlin.collections.forEach as forEach1
 
 
 class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteractionListener {
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteract
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create channel to show notifications.
@@ -63,41 +66,61 @@ class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteract
             }
 
 
-        val navController = findNavController(R.id.nav_host_fragment)
-        drawer_navigation.setupWithNavController(navController)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+        bottom_nav.setupWithNavController(navController)
         setSupportActionBar(toolbar)
+
+        supportActionBar?.elevation = 2f
         appBarConfiguration =
-            AppBarConfiguration.Builder(setOf(R.id.deviceFragment, R.id.appPreferenceFragment))
-                .setOpenableLayout(main_drawer_layout)
+            AppBarConfiguration.Builder(
+                setOf(
+                    R.id.deviceFragment,
+                    R.id.appPreferenceFragment,
+                    R.id.savedSearchFragment
+                )
+            )
                 .build()
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         viewModel = ViewModelProvider(this).get(ScanViewModel::class.java)
 
-        val interfaceMenu =
-            drawer_navigation.menu.addSubMenu(getString(R.string.interfaces_submenu))
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.deviceInfoFragment) {
+                bottom_nav.visibility = View.GONE
+            } else {
+                bottom_nav.visibility = View.VISIBLE
+            }
 
-        viewModel.fetchAvailableInterfaces().forEach1 { nic ->
-            interfaceMenu.add("${nic.interfaceName} - ${nic.address.hostAddress}/${nic.prefix}")
-                .also {
-                    it.setOnMenuItemClickListener {
-                        val bundle = bundleOf("interface_name" to nic.interfaceName)
-                        nav_host_fragment.findNavController().navigate(R.id.deviceFragment, bundle)
-                        main_drawer_layout.closeDrawers()
-                        true
-                    }
-                    it.setIcon(R.drawable.ic_settings_ethernet_white_24dp)
-                    it.isCheckable = true
-                    it.isEnabled = true
-                }
+            if (destination.id == R.id.deviceFragment) {
+                deviceInfoToolsBar.visibility = View.VISIBLE
+            } else {
+                deviceInfoToolsBar.visibility = View.GONE
+            }
         }
-        val preferences = drawer_navigation.menu.add(getString(R.string.preferences_submenu))
-        preferences.setIcon(R.drawable.ic_settings_white_24dp)
-        preferences.setOnMenuItemClickListener {
-            navController.navigate(R.id.appPreferenceFragment)
-            main_drawer_layout.closeDrawers()
-            true
+
+        val interfaces = viewModel.fetchAvailableInterfaces()
+        val interfaceNames =
+            interfaces.map { "${it.interfaceName} - ${it.address.hostAddress}/${it.prefix}" }
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            this,
+            android.R.layout.simple_spinner_item, interfaceNames
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        interfaceSpinner.adapter = adapter
+
+        interfaceSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
+                val bundle = bundleOf("interface_name" to interfaces[i].interfaceName)
+                nav_host_fragment.findNavController().navigate(R.id.deviceFragment, bundle)
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
         }
+
+
     }
 
 

@@ -17,6 +17,24 @@
             android:name="interface_name"
             android:defaultValue="wlan0" />
     </fragment>
+
+    <fragment
+        android:id="@+id/appPreferenceFragment"
+        android:name="osama.com.angryportscanner.ui.AppPreferenceFragment"
+        android:label="@string/preferences_submenu">
+        <action
+            android:id="@+id/action_appPreferenceFragment_to_deviceInfoFragment"
+            app:destination="@id/deviceInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedSearchFragment"
+        android:name="osama.com.angryportscanner.ui.SavedSearchFragment"
+        android:label="@string/saved_search">
+
+    </fragment>
+    <action
+        android:id="@+id/action_appPreferenceFragment"
+        app:destination="@id/appPreferenceFragment" />
     <fragment
         android:id="@+id/deviceInfoFragment"
         android:name="osama.com.angryportscanner.ui.DeviceInfoFragment"
@@ -30,13 +48,4 @@
             app:argType="long" />
     </fragment>
 
-    <fragment
-        android:id="@+id/appPreferenceFragment"
-        android:name="osama.com.angryportscanner.ui.AppPreferenceFragment"
-        android:label="@string/preferences_submenu">
-
-    </fragment>
-    <action
-        android:id="@+id/action_appPreferenceFragment"
-        app:destination="@id/appPreferenceFragment" />
 </navigation>

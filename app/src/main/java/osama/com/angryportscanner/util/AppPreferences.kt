@@ -29,6 +29,6 @@ class AppPreferences {
 
     val scanAll
         get(): Boolean {
-            return preferences.getBoolean("scan_all", false)
+            return preferences.getBoolean("scanAll", false)
         }
 }

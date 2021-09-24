@@ -18,6 +18,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.FirebaseApp
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,6 +31,8 @@ import osama.com.angryportscanner.ui.NetworkFragment
 class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteractionListener {
     private lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var viewModel: ScanViewModel
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     override fun onSupportNavigateUp(): Boolean {
         return findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
     }
@@ -50,6 +55,9 @@ class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteract
                 )
             )
         }
+
+        FirebaseApp.initializeApp(this)
+        firebaseAnalytics = Firebase.analytics
 
         Firebase.messaging.subscribeToTopic("default")
             .addOnCompleteListener { task ->

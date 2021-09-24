@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:checkableBehavior="single">
+
+    <item
+        android:id="@+id/deviceFragment"
+        android:title="Scan"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_search" />
+    <item
+        android:id="@+id/savedSearchFragment"
+        android:title="Saved Search"
+
+        app:showAsAction="always"
+
+        android:icon="@drawable/ic_clock" />
+
+    <item
+        android:id="@+id/appPreferenceFragment"
+        android:title="Settings"
+        app:showAsAction="always"
+
+        android:icon="@drawable/ic_settings" />
+</menu>

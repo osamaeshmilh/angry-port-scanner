@@ -25,6 +25,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 import kotlinx.android.synthetic.main.activity_main.*
 import osama.com.angryportscanner.model.DBViews.DeviceWithName
+import osama.com.angryportscanner.ui.FilterDialog
 import osama.com.angryportscanner.ui.NetworkFragment
 
 
@@ -41,7 +42,14 @@ class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteract
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+     filterBtn.setOnClickListener {
+         FilterDialog().apply {
+             setOnApplyListener { bundle ->
+                 Log.e("Filter bundle",bundle.toString())
+             }
+             show(supportFragmentManager,"Filter_Dialog")
+         }
+     }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create channel to show notifications.
@@ -111,11 +119,12 @@ class MainActivity : AppCompatActivity(), NetworkFragment.OnListFragmentInteract
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         interfaceSpinner.adapter = adapter
 
-        interfaceSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        interfaceSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
                 val bundle = bundleOf("interface_name" to interfaces[i].interfaceName)
                 nav_host_fragment.findNavController().navigate(R.id.deviceFragment, bundle)
             }
+
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }

@@ -3,14 +3,16 @@ package osama.com.angryportscanner.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import kotlinx.android.synthetic.main.fragment_deviceinfo_list.view.*
 import kotlinx.android.synthetic.main.fragment_port_item.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ import osama.com.angryportscanner.R
 import osama.com.angryportscanner.ScanViewModel
 import osama.com.angryportscanner.model.Device
 import osama.com.angryportscanner.model.Port
+import osama.com.angryportscanner.model.enums.Protocol
 import osama.com.angryportscanner.scanner.PortScanner
 import osama.com.angryportscanner.util.AppPreferences
 import osama.com.angryportscanner.util.CopyUtil
@@ -32,10 +35,43 @@ import osama.com.angryportscanner.util.CopyUtil
 class DeviceInfoFragment : Fragment() {
     lateinit var viewModel: ScanViewModel
 
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.device_details_menu, menu)
+    }
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.share -> {
+                Toast.makeText( requireContext(), "Share Clicked", Toast.LENGTH_SHORT).show()
+            }
+            R.id.copy -> {
+                Toast.makeText( requireContext(), "Copy Clicked", Toast.LENGTH_SHORT).show()
+
+            }
+            R.id.save -> {
+                Toast.makeText( requireContext(), "Save Clicked", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_deviceinfo_list, container, false)
         viewModel = ViewModelProvider(requireActivity()).get(ScanViewModel::class.java)
         val recyclerView = view.findViewById<RecyclerViewCommon>(R.id.list)
@@ -66,9 +102,38 @@ class DeviceInfoFragment : Fragment() {
             deviceHwAddressTextView.text =
                 it.hwAddress?.getAddress(AppPreferences(this).hideMacDetails)
             deviceVendorTextView.text = it.vendorName
+
+            view.deviceIcon.apply {
+                setImageResource(it.deviceType.icon)
+                badgeColor = ContextCompat.getColor(context, R.color.live_port_color)
+            }
+
         })
 
-        val ports = viewModel.portDao.getAllForDevice(argumentDeviceId)
+
+//        val ports =  viewModel.portDao.getAllForDevice(argumentDeviceId)
+        val ports = MutableLiveData(
+            listOf(
+                Port(
+                    0,
+                    port = 2200,
+                    protocol = Protocol.TCP,
+                    deviceId = 11111
+                ),
+                Port(
+                    1,
+                    port = 4400,
+                    protocol = Protocol.UDP,
+                    deviceId = 2222
+                ),
+                Port(
+                    2,
+                    port = 4422,
+                    protocol = Protocol.TCP,
+                    deviceId = 3333
+                ),
+            )
+        )
 
         recyclerView.setHandler(requireContext(), this, object :
             RecyclerViewCommon.Handler<Port>(R.layout.fragment_port_item, ports) {
@@ -110,7 +175,14 @@ class DeviceInfoFragment : Fragment() {
                 return { port ->
                     portNumberTextView.text = port.port.toString()
                     protocolTextView.text = port.protocol.toString()
-                    serviceTextView.text = port.description?.serviceName
+                    val serviceName = port.description?.serviceName
+                    if(serviceName.isNullOrBlank()){
+                        serviceTextView.visibility = View.GONE
+                    }else {
+                        serviceTextView.visibility = View.VISIBLE
+
+                        serviceTextView.text = serviceName
+                    }
                 }
             }
 

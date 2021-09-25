@@ -117,12 +117,17 @@ class NetworkFragment : Fragment(), LifecycleObserver {
 
                     return { item ->
                         ipTextView.text = item.ip.hostAddress
-                        macTextView.text = item.hwAddress?.getAddress(
-                            AppPreferences(
-                                this@NetworkFragment
-                            ).hideMacDetails
-                        )
-                        vendorTextView.text = item.vendorName
+
+
+                        item.hwAddress?.let {
+                            macTextView.text = it.getAddress(
+                                AppPreferences(
+                                    this@NetworkFragment
+                                ).hideMacDetails
+                            )
+                        }?: run { macTextView.visibility = View.GONE }
+
+//                        vendorTextView.text = item.vendorName
                         deviceNameTextView.text = if (item.isScanningDevice) {
                             getString(R.string.this_device)
                         } else {

@@ -14,7 +14,7 @@
     <string name="field_name_device_ip">Device IP</string>
     <string name="field_name_device_mac">Device MAC</string>
     <string name="field_name_vendor_name">Vendor Name</string>
-    <string name="title_open_ports">Open Ports:</string>
+    <string name="title_open_ports">Open Ports</string>
     <string name="this_device">This device</string>
     <string name="error_network_not_found">Network not found</string>
     <string name="hideMacAddressDetails">Hide MAC Address Details</string>
@@ -67,6 +67,20 @@
         <item>With open ports only</item>
         <item>Open ports or alive</item>
         <item>All hosts</item>
+    </string-array>
+
+    <string-array name="sort_by">
+        <item>Default</item>
+        <item>Name</item>
+        <item>Date</item>
+        <item>Type</item>
+    </string-array>
+
+    <string-array name="group_by">
+        <item>Default</item>
+        <item>Group Option 1</item>
+        <item>Group Option 2</item>
+
     </string-array>
 
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
